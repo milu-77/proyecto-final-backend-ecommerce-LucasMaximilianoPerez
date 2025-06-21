@@ -7,11 +7,12 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-@DiscriminatorValue("carrito")
-public class ItemCarrito extends Item{
+
+@DiscriminatorValue("pedido")
+public class ItemPedido extends Item {
 
     @ManyToOne
-    @JoinColumn(name = "carrito_id")
-    private Carrito carrito;
+    @JoinColumn(name = "pedido_id")
+    private Pedido pedido;
 
-}
+ }

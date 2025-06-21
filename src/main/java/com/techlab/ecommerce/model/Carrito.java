@@ -18,7 +18,14 @@ public class Carrito {
     private Long id;
 
     private LocalDateTime fechaCreacion;
+    private Double total;
+    private EstadoCarrito estado;
 
     @OneToMany(mappedBy = "carrito", cascade = CascadeType.ALL)
     private List<ItemCarrito> items = new ArrayList<>();
+
+    @OneToOne
+    @JoinColumn(name = "usuario_id") // FK en tabla carrito
+    private Usuario usuario; // Dueño del carrito
+
  }

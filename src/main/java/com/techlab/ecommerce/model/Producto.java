@@ -17,7 +17,11 @@ public class Producto {
     private Double precio;
     private Integer stock;
     private String descripcion;
-    private String categoria;
+    private String url;
+    @ManyToOne
+    @JoinColumn(name = "categoria_id")
+    private Categoria categoria;
+
     Producto (){
 
     }

@@ -1,9 +1,7 @@
 package com.techlab.ecommerce.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,11 +11,16 @@ import lombok.Setter;
 @Table(name = "usuario")
 public class Usuario {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String user;
+    private String username;
     private String pass;
     private String mail;
+    @OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private Carrito carrito;
 
+  Usuario(){
 
+}
 }

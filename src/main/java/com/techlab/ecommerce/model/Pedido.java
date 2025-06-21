@@ -13,15 +13,16 @@ import java.util.List;
 @Table(name = "pedido")
 public class Pedido {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private LocalDateTime fecha;
-
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<ItemCarrito> items;
-
+    private LocalDateTime fechaCreacion;
     private Double total;
+    private EstadoPedido estado;
+    @OneToMany(mappedBy = "pedido",cascade = CascadeType.ALL)
+    private List<ItemPedido> items;
+
+
     @ManyToOne
     @JoinColumn(name = "usuario_id")
      Usuario usuario;
