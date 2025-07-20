@@ -1,5 +1,6 @@
-package com.techlab.ecommerce.model;
+package com.techlab.ecommerce.model.items;
 
+import com.techlab.ecommerce.model.Producto;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -8,7 +9,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "tipo_item", discriminatorType = DiscriminatorType.STRING)
+@Table(name = "item")
+@DiscriminatorColumn(name = "tipo", discriminatorType = DiscriminatorType.STRING)
 public class Item {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

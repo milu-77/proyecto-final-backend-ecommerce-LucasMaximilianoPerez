@@ -1,10 +1,24 @@
 package com.techlab.ecommerce.repository;
 
- import com.techlab.ecommerce.model.Item;
+ import com.techlab.ecommerce.model.items.Item;
  import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+ import org.springframework.data.jpa.repository.Query;
+ import org.springframework.data.repository.query.Param;
+ import org.springframework.stereotype.Repository;
+
+ import java.util.List;
+ import java.util.Optional;
 
 @Repository
 public interface ItemRepository extends JpaRepository<Item, Long> {
+
+ @Query("SELECT i FROM Item i WHERE TYPE(i) = ItemPedido")
+ List<Item> findAllPedidos();
+
+ // Opción 2: Consultando por el valor discriminador
+ @Query("SELECT i FROM Item i WHERE TYPE(i) = ItemCarrito")
+ List<Item> findAllCarritos();
+
+
 
 }

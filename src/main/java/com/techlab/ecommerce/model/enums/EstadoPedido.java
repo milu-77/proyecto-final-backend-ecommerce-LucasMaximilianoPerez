@@ -1,4 +1,4 @@
-package com.techlab.ecommerce.model;
+package com.techlab.ecommerce.model.enums;
 
 public enum EstadoPedido implements Estado {
     PENDIENTE_PAGO,   // Creado pero no pagado

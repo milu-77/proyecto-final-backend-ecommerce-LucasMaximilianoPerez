@@ -1,6 +1,6 @@
 package com.techlab.ecommerce.controller;
 
- import com.techlab.ecommerce.dtos.response.UsuarioResponseDTO;
+ import com.techlab.ecommerce.dtos.response.UsuarioResponse;
  import com.techlab.ecommerce.model.Producto;
  import com.techlab.ecommerce.model.Usuario;
  import com.techlab.ecommerce.service.UsuarioService;
@@ -19,16 +19,16 @@ public class UsuarioController {
     @Autowired
     private UsuarioService usuarioService;
     @GetMapping
-    public List<UsuarioResponseDTO> listar() {
+    public List<UsuarioResponse> listar() {
         return usuarioService.listarTodos().stream()
-                .map(UsuarioResponseDTO::fromUsuario)
+                .map(UsuarioResponse::fromUsuario)
                 .collect(Collectors.toList());
     }
     @GetMapping("/{id}")
-     public UsuarioResponseDTO getUserID(@PathVariable  Long id) {
+     public UsuarioResponse getUserID(@PathVariable  Long id) {
         Optional<Usuario> protoUsuario = usuarioService.getByID(id);
         Usuario usuario = protoUsuario.orElseThrow(() -> new RuntimeException("Producto con ID " + id + " no encontrado"));
-        return UsuarioResponseDTO.fromUsuario(usuario);
+        return UsuarioResponse.fromUsuario(usuario);
     }
     @PostMapping
     public Usuario crear(@RequestBody Usuario producto) {

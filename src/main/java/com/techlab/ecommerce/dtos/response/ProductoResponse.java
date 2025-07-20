@@ -6,7 +6,7 @@ import lombok.Data;
 import java.util.Optional;
 
 @Data
-public class  ProductoResponseDTO {
+public class ProductoResponse {
 
       String nombre;
       Double precio;
@@ -14,8 +14,8 @@ public class  ProductoResponseDTO {
       String descripcion;
       String url;
 
-    public static ProductoResponseDTO fromProducto( Producto  producto) {
-        ProductoResponseDTO dto = new ProductoResponseDTO();
+    public static ProductoResponse fromProducto(Producto  producto) {
+        ProductoResponse dto = new ProductoResponse();
         dto.setNombre(producto.getNombre());
         dto.setPrecio(producto.getPrecio());
         dto.setStock(producto.getStock());
@@ -23,6 +23,9 @@ public class  ProductoResponseDTO {
         dto.setUrl("/productos/" + producto.getId()); // Ejemplo de URL generada
         return dto;
     }
+
+
+
 
 
 }

@@ -1,4 +1,4 @@
-package com.techlab.ecommerce.model;
+package com.techlab.ecommerce.model.enums;
 
 public enum EstadoCarrito implements Estado {
     ACTIVO,         // El usuario puede modificarlo

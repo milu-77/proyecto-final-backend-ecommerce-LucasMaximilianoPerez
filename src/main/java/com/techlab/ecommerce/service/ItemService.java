@@ -1,7 +1,7 @@
 package com.techlab.ecommerce.service;
 
-import com.techlab.ecommerce.model.Item;
-import com.techlab.ecommerce.model.ItemCarrito;
+import com.techlab.ecommerce.model.items.Item;
+import com.techlab.ecommerce.model.items.ItemCarrito;
 import com.techlab.ecommerce.model.Producto;
 import com.techlab.ecommerce.model.Usuario;
   import com.techlab.ecommerce.repository.ItemRepository;
@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ItemService {
@@ -20,8 +21,8 @@ public class ItemService {
         return itemRepository.findAll();
     }
 
-    public ItemCarrito getByID(int id) {
-        return null;
+    public Optional<Item> getByID(Long  id) {
+        return itemRepository.findById(id);
     }
 
     public ItemCarrito guardar(Usuario producto) {
@@ -34,5 +35,12 @@ public class ItemService {
 
     public boolean eliminar(Long id) {
         return false;
+    }
+
+    public List<Item> listarPedidos() {
+        return itemRepository.findAllPedidos();
+    }
+    public List<Item> listarCarritos() {
+        return itemRepository.findAllCarritos();
     }
 }

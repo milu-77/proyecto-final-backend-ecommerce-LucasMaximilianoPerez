@@ -1,13 +1,12 @@
 package com.techlab.ecommerce.controller;
 
-import com.techlab.ecommerce.dtos.response.CarritoResponseDTO;
+import com.techlab.ecommerce.dtos.response.CarritoResponse;
 import com.techlab.ecommerce.model.*;
 import com.techlab.ecommerce.service.CarritoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,18 +17,18 @@ public class CarritoController {
     @Autowired
     private CarritoService carritoService;
     @GetMapping
-    public List<CarritoResponseDTO> listar() {
+    public List<CarritoResponse> listar() {
 
         return carritoService.listarTodos().stream()
-                .map(CarritoResponseDTO::fromCarrito)
+                .map(CarritoResponse::fromCarrito)
                 .toList();
     }
 
     @GetMapping("/{id}")
-    public CarritoResponseDTO getUserID(@PathVariable Long id) {
+    public CarritoResponse getUserID(@PathVariable Long id) {
         Optional<Carrito> protoCarrito=carritoService.getByID(id);
         Carrito carrito = protoCarrito.orElseThrow(()->new RuntimeException("Carrito no encontrad"));
-        return CarritoResponseDTO.fromCarrito(carrito);
+        return CarritoResponse.fromCarrito(carrito);
     }
     @GetMapping("/usuario/{id}")
     public List<Carrito> getUserByIdUsuario(@PathVariable Long id) {

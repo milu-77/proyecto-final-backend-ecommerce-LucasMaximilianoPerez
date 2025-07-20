@@ -1,6 +1,6 @@
 package com.techlab.ecommerce.controller;
 
-import com.techlab.ecommerce.dtos.response.CarritoResponseDTO;
+import com.techlab.ecommerce.dtos.response.CarritoResponse;
 import com.techlab.ecommerce.model.Pedido;
 import com.techlab.ecommerce.model.Producto;
 import com.techlab.ecommerce.model.Usuario;
@@ -19,24 +19,30 @@ public class PedidoController {
     private PedidoService pedidoService;
 
     @GetMapping
-    public List<CarritoResponseDTO> listar() {
+    public List<CarritoResponse> listar() {
 
         return pedidoService.listarTodos().stream()
-                .map(CarritoResponseDTO::fromPedido)
+                .map(CarritoResponse::fromPedido)
                 .toList();
     }
 
     @GetMapping("/{id}")
-    public Pedido getPedidoID(@PathVariable Long id) {
-        return pedidoService.getByID(id);
+    public CarritoResponse getPedidoID(@PathVariable Long id) {
+
+        return CarritoResponse.fromPedido( pedidoService.getByID(id) );
     }
     @GetMapping("/usuario/{id}")
-    public List<Pedido> getPedidosByIdUser(@PathVariable Long id) {
-        return pedidoService.getByIdUser(id);
+    public List<CarritoResponse>getPedidosByIdUser(@PathVariable Long id) {
+        return pedidoService.getByIdUser(id).stream()
+                .map(CarritoResponse::fromPedido)
+                .toList();
     }
 
     @PostMapping
     public Pedido crear(@RequestBody Usuario producto) {
+
+
+
         return pedidoService.guardar(producto);
     }
 

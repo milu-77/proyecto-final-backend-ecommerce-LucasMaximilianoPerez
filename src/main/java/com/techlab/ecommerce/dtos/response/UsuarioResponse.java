@@ -4,13 +4,13 @@ import com.techlab.ecommerce.model.Usuario;
 import lombok.Data;
 
 @Data
-public class UsuarioResponseDTO {
+public class UsuarioResponse {
     private String username;
     private String pass;
     private String mail;
 
-    public static UsuarioResponseDTO fromUsuario(Usuario usuario) {
-        UsuarioResponseDTO dto = new UsuarioResponseDTO();
+    public static UsuarioResponse fromUsuario(Usuario usuario) {
+        UsuarioResponse dto = new UsuarioResponse();
         dto.setUsername(usuario.getUsername());
         dto.setPass(usuario.getPass());
         dto.setMail(usuario.getMail());
