@@ -1,7 +1,9 @@
 package com.techlab.ecommerce.model.items;
 
+import com.techlab.ecommerce.dtos.request.CrearProducto;
 import com.techlab.ecommerce.model.Producto;
 import jakarta.persistence.*;
+import jakarta.validation.Valid;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -22,5 +24,16 @@ public class Item {
     @ManyToOne
     @JoinColumn(name = "producto_id")
     Producto producto;
+
+
+    public Item(Producto producto) {
+        this.cantidad=producto.getStock();
+        this.precio=producto.getPrecio();
+        this.producto=producto;
+    }
+    public Item(   ) {
+
+    }
+
 
 }

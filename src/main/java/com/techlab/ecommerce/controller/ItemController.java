@@ -64,7 +64,7 @@ public class ItemController {
 
     @PostMapping
     public ItemCarrito crear(@RequestBody Usuario producto) {
-        return itemService.guardar(producto);
+        return null;
     }
 
     @PutMapping("/{id}")

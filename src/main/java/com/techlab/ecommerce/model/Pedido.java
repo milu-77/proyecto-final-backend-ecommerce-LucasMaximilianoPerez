@@ -27,4 +27,8 @@ public class Pedido {
     @ManyToOne
     @JoinColumn(name = "usuario_id")
      Usuario usuario;
+
+    public Pedido( ) {
+
+    }
 }

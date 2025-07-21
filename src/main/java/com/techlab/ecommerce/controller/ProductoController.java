@@ -54,7 +54,8 @@ public class ProductoController {
 
     @GetMapping("/buscar")
     public ResponseEntity<?> getProductonombre(
-            @RequestParam String nombre )
+            @RequestParam
+            String nombre )
     {
         try{
             Producto producto = productoService.getByNombre(nombre);

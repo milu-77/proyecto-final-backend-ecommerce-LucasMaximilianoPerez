@@ -39,11 +39,11 @@ public class PedidoController {
     }
 
     @PostMapping
-    public Pedido crear(@RequestBody Usuario producto) {
+    public void crear(@RequestBody Pedido producto) {
 
 
 
-        return pedidoService.guardar(producto);
+          pedidoService.guardar(producto);
     }
 
     @PutMapping("/{id}")

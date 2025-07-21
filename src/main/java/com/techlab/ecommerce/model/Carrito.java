@@ -1,7 +1,9 @@
 package com.techlab.ecommerce.model;
 
 import com.techlab.ecommerce.model.enums.EstadoCarrito;
+import com.techlab.ecommerce.model.items.Item;
 import com.techlab.ecommerce.model.items.ItemCarrito;
+import com.techlab.ecommerce.model.items.ItemPedido;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -9,6 +11,7 @@ import lombok.Setter;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity(name = "carrito")
 @Getter
@@ -31,4 +34,43 @@ public class Carrito {
     @JoinColumn(name = "usuario_id") // FK en tabla carrito
     private Usuario usuario; // Dueño del carrito
 
- }
+    public void agregarItem(Item item) {
+
+           this.items.add((ItemCarrito) item);
+
+
+
+    }
+
+    public boolean existeItemPorNombreProducto(String nombreProducto) {
+        return items.stream()
+                .anyMatch(item ->
+                        item.getProducto() != null &&
+                                nombreProducto.equalsIgnoreCase(nombreProducto)
+                );
+    }
+
+    public void actualizarItem(ItemCarrito itemcarrito) {
+        items.stream()
+                .filter(item -> item.getProducto() != null
+                        && item.getProducto().getNombre().equalsIgnoreCase(itemcarrito.getProducto().getNombre()))
+                .findFirst()
+                .ifPresent(item -> {
+                    // Actualizar los valores del ítem encontrado
+                    item.setCantidad(itemcarrito.getCantidad());
+                    item.setPrecio(itemcarrito.getPrecio() );
+                });
+    }
+
+    public ArrayList<ItemPedido> convertirItemPedido(Pedido pedido) {
+        return this.items.stream()
+                .map(itemCarrito -> new ItemPedido(itemCarrito, pedido))
+                .collect(Collectors.toCollection(ArrayList::new));
+
+    }
+    public Double getTotal(){
+        return items.stream()
+                .mapToDouble(itemCarrito -> itemCarrito.getCantidad() * itemCarrito.getPrecio())
+                .sum();
+    }
+}

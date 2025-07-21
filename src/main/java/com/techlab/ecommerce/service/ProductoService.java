@@ -58,6 +58,13 @@ public class ProductoService {
         }
 
     }
+    public void guardar(Producto producto)
+    {
+
+            productoRepository.save(producto);
+
+
+    }
 
     public Producto getByID(Long id)
     {

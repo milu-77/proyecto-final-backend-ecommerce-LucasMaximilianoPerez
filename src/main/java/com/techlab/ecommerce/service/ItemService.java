@@ -25,7 +25,8 @@ public class ItemService {
         return itemRepository.findById(id);
     }
 
-    public ItemCarrito guardar(Usuario producto) {
+    public ItemCarrito guardar(ItemCarrito producto) {
+        this.itemRepository.save(producto);
         return null;
     }
 

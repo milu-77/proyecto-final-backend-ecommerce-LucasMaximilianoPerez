@@ -24,9 +24,9 @@ public class PedidoService {
         return null;
     }
 
-    public Pedido guardar(Usuario producto) {
-        return null;
-    }
+    public void guardar(Pedido pedido) {
+        pedidoRepository.save(pedido);
+     }
 
     public Pedido getByID(Long id) {
         return null;

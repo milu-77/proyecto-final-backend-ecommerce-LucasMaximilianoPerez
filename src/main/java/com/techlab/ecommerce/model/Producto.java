@@ -47,4 +47,6 @@ public class Producto {
     public Producto actualizar(Long id,CrearProducto datos) {
         return new Producto(Math.toIntExact(id),datos.getNombre(),datos.getDescripcion(),datos.getPrecio(),datos.getStock() ,datos.getUrl()        );
     }
+
+
 }
