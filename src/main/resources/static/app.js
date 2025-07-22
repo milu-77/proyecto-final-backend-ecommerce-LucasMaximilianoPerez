@@ -2,10 +2,18 @@ Vue.createApp({
   data() {
     return {
       botonActivo: 1,
-      titulo: "javaadultos-1C2025",
+      botonProducto:1,
+      titulo: "java adultos-1C2025",
       productos: [],
       carrito: [],
       pedidos: [],
+        nuevoProducto: {
+        nombre: 'producto nuevo',
+        precio: 0,
+        stock: 0,
+        descripcion: '',
+        url: 'https://placehold.co/400x400?text=producto+nuevo'
+      },
     };
   },
   created() {},
@@ -29,6 +37,10 @@ Vue.createApp({
     },
     accionBoton: function(numeroSeccion) {
       this.botonActivo = numeroSeccion;
+      this.botonProducto = 1;
+    },
+    accionProducto: function(numeroSeccion) {
+      this.botonProducto = numeroSeccion;
     },
     getCarrito: function() {
       axios
@@ -41,6 +53,39 @@ Vue.createApp({
           console.error(err);
         });
     },
+      async agregarProducto() {
+      this.loading = true;
+      try {
+        const response = await axios.post(
+          'http://localhost:8080/productos',
+          this.nuevoProducto
+        );
+        console.log('Producto agregado:', response.data);
+        // Limpiar formulario o redirigir
+      } catch (error) {
+        console.error('Error:', error.response?.data);
+      } finally {
+        this.loading = false;
+      }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    },
+
+
+
     getPedidos: function() { 
       axios
         .get(`http://localhost:8080/pedidos`)
