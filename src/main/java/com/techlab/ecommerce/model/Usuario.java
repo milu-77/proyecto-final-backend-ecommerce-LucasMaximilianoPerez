@@ -23,4 +23,8 @@ public class Usuario {
   Usuario(){
 
 }
+
+    public boolean tieneCarrito() {
+      return !(this.carrito ==null);
+    }
 }

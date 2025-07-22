@@ -5,6 +5,7 @@ import com.techlab.ecommerce.model.items.Item;
 import com.techlab.ecommerce.model.items.ItemCarrito;
 import com.techlab.ecommerce.model.items.ItemPedido;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -33,6 +34,15 @@ public class Carrito {
     @OneToOne
     @JoinColumn(name = "usuario_id") // FK en tabla carrito
     private Usuario usuario; // Dueño del carrito
+
+
+
+    public Carrito() {
+    }
+
+    public Carrito(Usuario usuario) {
+        this.usuario=usuario;
+    }
 
     public void agregarItem(Item item) {
 
@@ -72,5 +82,9 @@ public class Carrito {
         return items.stream()
                 .mapToDouble(itemCarrito -> itemCarrito.getCantidad() * itemCarrito.getPrecio())
                 .sum();
+    }
+
+    public void quitarUsuario() {
+        this.usuario=null;
     }
 }

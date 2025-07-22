@@ -1,5 +1,6 @@
 package com.techlab.ecommerce.service;
 
+import com.techlab.ecommerce.dtos.request.CrearCarrito;
 import com.techlab.ecommerce.dtos.request.CrearProducto;
 import com.techlab.ecommerce.exception.ProductServiceException;
 import com.techlab.ecommerce.exception.carritoServiceException;
@@ -34,6 +35,8 @@ public class CarritoService {
     ItemService itemService;
     @Autowired
     private PedidoService pedidoService;
+    @Autowired
+    private UsuarioService usuarioService;
 
     public List<Carrito> listarTodos() {
         return carritoRepository.findAll();
@@ -131,12 +134,24 @@ public class CarritoService {
          pedido.setTotal(carrito.getTotal());
          pedido.setEstado(EstadoPedido.EN_PREPARACION);
          carrito.setEstado(EstadoCarrito.CONVERTIDO);
+         carrito.quitarUsuario();
 
-//        pedido.setItems(convertirItemPedido(carrito.getItems(),pedido));
-//        pedido.setUsuario(carrito.getUsuario());
+
          this.pedidoService.guardar(pedido);
 
     }
 
 
+    public void crearCarrito(@Valid CrearCarrito cliente) {
+        Usuario usuario = this.usuarioService.getByUsername(cliente.getUsuario());
+        if(usuario.tieneCarrito()){
+            throw new carritoServiceException("El usuario ya tiene un carrito");
+
+        }
+
+        Carrito carrito= new Carrito();
+        carrito.setUsuario(usuario);
+        carrito.setEstado(EstadoCarrito.ACTIVO);
+        this.carritoRepository.save(carrito);
+    }
 }

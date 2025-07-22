@@ -1,15 +1,12 @@
 package com.techlab.ecommerce.controller;
 
+import com.techlab.ecommerce.dtos.request.CrearCarrito;
 import com.techlab.ecommerce.dtos.request.CrearProducto;
 import com.techlab.ecommerce.dtos.response.AcceptResponse;
 import com.techlab.ecommerce.dtos.response.CarritoResponse;
-import com.techlab.ecommerce.dtos.response.ProductoResponse;
 import com.techlab.ecommerce.exception.ErrorResponse;
 import com.techlab.ecommerce.model.*;
-import com.techlab.ecommerce.model.items.Item;
-import com.techlab.ecommerce.model.items.ItemCarrito;
 import com.techlab.ecommerce.service.CarritoService;
-import com.techlab.ecommerce.service.ProductoService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +16,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/carritos")
@@ -71,13 +67,34 @@ public class CarritoController {
     }
 
     @PostMapping("/{carritoId}/cerrar")
-     public void crear(
+     public ResponseEntity<?> cerrarCarrito(
             @PathVariable
             @Min(1)
             Long carritoId) //VACIA CARRITO Y CREA PEDIDO
     {
-          carritoService.cerrarCarritoYCrearPedido(carritoId);
+        try {
+            carritoService.cerrarCarritoYCrearPedido(carritoId);
+            return  ResponseEntity.ok(("Carrito cerrado y pedido creado exitosamente"));
+
+        } catch (Exception e) {
+                return  ResponseEntity.badRequest().body(new ErrorResponse(HttpStatus.BAD_REQUEST.value(),  e.getMessage()));
+            }
+     }
+    @PostMapping("/crear")
+    public ResponseEntity<?> crearCarrito(
+             @Valid
+            @RequestBody
+             CrearCarrito cliente) //VACIA CARRITO Y CREA PEDIDO
+    {
+        try {
+            carritoService.crearCarrito(cliente);
+            return  ResponseEntity.ok("Carrito creado");
+
+
+        } catch (Exception e) {
+        return  ResponseEntity.badRequest().body(new ErrorResponse(HttpStatus.BAD_REQUEST.value(),  e.getMessage()));
     }
+     }
 
     @PutMapping("/{id}")
     @Validated
