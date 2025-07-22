@@ -29,8 +29,7 @@ Vue.createApp({
         .get(`http://localhost:8080/productos`)
         .then((res) => {
           this.productos = res.data;
-          console.log(this.productos);
-        })
+         })
         .catch((err) => {
           console.error(err);
         });
@@ -38,17 +37,18 @@ Vue.createApp({
     accionBoton: function(numeroSeccion) {
       this.botonActivo = numeroSeccion;
       this.botonProducto = 1;
+      this.getProductos();
     },
     accionProducto: function(numeroSeccion) {
       this.botonProducto = numeroSeccion;
+      this.getProductos();
     },
     getCarrito: function() {
       axios
         .get(`http://localhost:8080/carritos/1`)
         .then((res) => {
           this.carrito = res.data;
-          console.log(this.carrito);
-        })
+         })
         .catch((err) => {
           console.error(err);
         });
@@ -60,10 +60,9 @@ Vue.createApp({
           'http://localhost:8080/productos',
           this.nuevoProducto
         );
-        console.log('Producto agregado:', response.data);
-        // Limpiar formulario o redirigir
+        console.log( response.data.message);
       } catch (error) {
-        console.error('Error:', error.response?.data);
+        console.error('Error:', error.response?.data.message);
       } finally {
         this.loading = false;
       }
