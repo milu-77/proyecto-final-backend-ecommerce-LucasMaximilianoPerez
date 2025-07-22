@@ -16,6 +16,7 @@ public class Producto {
     private String nombre;
     private String descripcion;
     private Double precio;
+    @Column(length = 1000) // Ajusta según necesidad
     private String url;
     private Integer stock;
     @ManyToOne

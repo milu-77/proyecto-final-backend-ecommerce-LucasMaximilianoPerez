@@ -20,7 +20,7 @@ public class ProductoResponse {
         dto.setPrecio(producto.getPrecio());
         dto.setStock(producto.getStock());
         dto.setDescripcion(producto.getDescripcion());
-        dto.setUrl("/productos/" + producto.getId()); // Ejemplo de URL generada
+        dto.setUrl(producto.getUrl()); // Ejemplo de URL generada
         return dto;
     }
 

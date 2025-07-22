@@ -6,17 +6,17 @@ INSERT INTO categoria (nombre, descripcion) VALUES
     ('Libros', 'Libros físicos y digitales de diversos géneros'),
     ('Belleza', 'Productos de cuidado personal y cosméticos');
 
-INSERT INTO producto (nombre, precio, stock, descripcion, categoria_id,deleted) VALUES
-    ('Laptop HP Pavilion', 899.99, 15, 'Laptop con 8GB RAM y SSD 256GB', 1,true),
-    ('Smartphone Samsung Galaxy S21', 749.50, 30, 'Pantalla AMOLED 6.2 pulgadas', 1,false),
-    ('Auriculares Sony WH-1000XM4', 349.99, 25, 'Cancelación de ruido premium',1,false),
-    ('Libro Cien años de soledad', 19.99, 50, 'Edición especial tapa dura', 4,false),
-    ('Zapatillas Nike Air Max', 129.95, 40, 'Talla 42, color blanco', 3,false),
-    ('Cafetera Nespresso Essenza', 99.00, 20, 'Compacta y automática', 2,false),
-    ('Mochila The North Face', 79.99, 35, 'Resistente al agua, 30L', 3,false),
-    ('Teclado Mecánico Logitech G Pro', 149.99, 18, 'Switches Cherry MX Red', 1,false),
-    ('Set de Lego Star Wars', 59.95, 12, 'Millennium Falcon edición coleccionista', 1,false),
-    ('Crema Hidratante Cerave', 12.49, 60, 'Para pieles sensibles, 473ml', 5,false);
+INSERT INTO producto (nombre, precio,url, stock, descripcion, categoria_id,deleted) VALUES
+    ('Laptop HP Pavilion', 899.99,'https://placehold.co/400x400?text=Laptop+HP+Pavilion', 15, 'Laptop con 8GB RAM y SSD 256GB', 1,true),
+    ('Smartphone Samsung Galaxy S21', 749.50,'https://placehold.co/400x400?text=Smartphone+Samsung+Galaxy+S21', 30, 'Pantalla AMOLED 6.2 pulgadas', 1,false),
+    ('Auriculares Sony WH-1000XM4', 349.99,'https://placehold.co/400x400?text=Auriculares+Sony+WH-1000XM4', 25, 'Cancelación de ruido premium',1,false),
+    ('Libro Cien años de soledad', 19.99,'https://placehold.co/400x400?text=Libro+Cien+años+de+soledad', 50, 'Edición especial tapa dura', 4,false),
+    ('Zapatillas Nike Air Max', 129.95,'https://placehold.co/400x400?text=Zapatillas+Nike+Air+Max', 40, 'Talla 42, color blanco', 3,false),
+    ('Cafetera Nespresso Essenza', 99.00,'https://placehold.co/400x400?text=Cafetera+Nespresso+Essenza', 20, 'Compacta y automática', 2,false),
+    ('Mochila The North Face', 79.99,'https://placehold.co/400x400?text=Mochila+The+North+Face', 35, 'Resistente al agua, 30L', 3,false),
+    ('Teclado Mecánico Logitech G Pro', 149.99,'https://placehold.co/400x400?text=Teclado+Mecánico+Logitech+G+Pro',18, 'Switches Cherry MX Red', 1,false),
+    ('Set de Lego Star Wars', 59.95,'https://placehold.co/400x400?text=Set+de+Lego+Star+Wars',12 , 'Set de Lego Star Wars', 1,false),
+    ('Crema Hidratante Cerave', 12.49,'https://placehold.co/400x400?text=Crema+Hidratante+Cerave', 60, 'Para pieles sensibles, 473ml', 5,false);
 
 INSERT INTO usuario (username, pass, mail) VALUES
     ('jperez', '$2a$10$xJwL5vGZ/5UeB7zq5WQY.e5z4dLk9Xb0rJ3Vc2sQhYbW1nKvLmNOP', 'juan.perez@example.com'),
