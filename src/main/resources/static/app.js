@@ -3,6 +3,8 @@ Vue.createApp({
     return {
       botonActivo: 1,
       botonProducto:1,
+      url:" https://placehold.co/400x400?text=",
+
       titulo: "java adultos-1C2025",
       productos: [],
       carrito: [],
@@ -12,7 +14,7 @@ Vue.createApp({
         precio: 0,
         stock: 0,
         descripcion: '',
-        url: 'https://placehold.co/400x400?text=producto+nuevo'
+        url: 'producto+nuevo'
       },
     };
   },
@@ -55,6 +57,7 @@ Vue.createApp({
     },
       async agregarProducto() {
       this.loading = true;
+      this.nuevoProducto.url=this.url+this.nuevoProducto.url
       try {
         const response = await axios.post(
           'http://localhost:8080/productos',
