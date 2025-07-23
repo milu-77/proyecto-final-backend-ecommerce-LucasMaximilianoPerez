@@ -36,6 +36,16 @@ public class Producto {
         this.stock = stock;
         this.url=url;
     }
+    public Producto(String nombre, String descripcion, Double precio, Integer stock, String url,Categoria categoria){
+
+        this.nombre=nombre;
+        this.descripcion=descripcion;
+        this.precio=precio;
+        this.stock = stock;
+        this.url=url;
+        this.categoria=categoria;
+
+    }
     public Producto(Integer id,String nombre, String descripcion, Double precio, Integer stock, String url){
         this.id=id;
         this.nombre=nombre;
@@ -44,6 +54,16 @@ public class Producto {
         this.stock = stock;
         this.url=url;
     }
+    public Producto(Integer id,String nombre, String descripcion, Double precio, Integer stock, String url,Categoria categoria){
+        this.id=id;
+        this.nombre=nombre;
+        this.descripcion=descripcion;
+        this.precio=precio;
+        this.stock = stock;
+        this.url=url;
+        this.categoria=categoria;
+    }
+
 
     public Producto actualizar(Long id,CrearProducto datos) {
         return new Producto(Math.toIntExact(id),datos.getNombre(),datos.getDescripcion(),datos.getPrecio(),datos.getStock() ,datos.getUrl()        );

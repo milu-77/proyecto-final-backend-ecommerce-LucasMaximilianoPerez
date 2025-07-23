@@ -1,5 +1,6 @@
 package com.techlab.ecommerce.service;
 
+import com.techlab.ecommerce.exception.ProductServiceException;
 import com.techlab.ecommerce.model.Categoria;
 import com.techlab.ecommerce.model.Producto;
 import com.techlab.ecommerce.model.Usuario;
@@ -20,9 +21,15 @@ public class CategoriaService {
         return categoriaRepository.findAll();
     }
 
-    public Optional<Categoria> getByID(Long id) {
-        return this.categoriaRepository.findById(id);
-    }
+    public  Categoria  getByID(Long id) {
+        Optional<Categoria> categoria =this.categoriaRepository.findById(id);
+        if(categoria.isPresent()){
+            return categoria.get();
+        }else {
+            throw new ProductServiceException("La categoria  no existe"+id);
+        }
+
+     }
 
     public Categoria guardar(Usuario producto) {
         return null;

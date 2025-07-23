@@ -2,6 +2,7 @@ package com.techlab.ecommerce.service;
 
 import com.techlab.ecommerce.dtos.request.CrearProducto;
 import com.techlab.ecommerce.exception.ProductServiceException;
+import com.techlab.ecommerce.model.Categoria;
 import com.techlab.ecommerce.model.Producto;
 import com.techlab.ecommerce.repository.ProductoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,8 @@ import java.util.stream.Collectors;
 public class ProductoService {
     @Autowired
     private ProductoRepository productoRepository;
+    @Autowired
+    private CategoriaService categoriaService;
 
     public boolean eliminar(Long id)
     {
@@ -31,8 +34,6 @@ public class ProductoService {
         }else{
             throw new ProductServiceException("El producto con nombre: '" + id+ " no existe");
         }
-
-
      }
 
     public Producto  actualizar(Long id, CrearProducto  datos)
@@ -48,12 +49,15 @@ public class ProductoService {
         }
      }
 
-    public Optional<Producto> guardar(CrearProducto producto)
+    public Optional<Producto> guardar(CrearProducto produc)
     {
-        if (productoRepository.findByNombre(producto.getNombre()).isPresent()) {
-            throw new ProductServiceException("El producto '" + producto.getNombre() + "' ya está registrado");
+        if (productoRepository.findByNombre(produc.getNombre()).isPresent()) {
+            throw new ProductServiceException("El producto '" + produc.getNombre() + "' ya está registrado");
         }else{
-            productoRepository.save(producto.toProducto());
+            Producto producto = produc.toProducto();
+            Categoria categoria= categoriaService.getByID(produc.getCategoriaId());
+            producto.setCategoria(categoria);
+            productoRepository.save(producto);
             return productoRepository.findByNombre(producto.getNombre());
         }
 

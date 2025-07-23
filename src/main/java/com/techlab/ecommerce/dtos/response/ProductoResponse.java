@@ -7,7 +7,7 @@ import java.util.Optional;
 
 @Data
 public class ProductoResponse {
-
+        Integer id;
       String nombre;
       Double precio;
       Integer stock;
@@ -16,6 +16,7 @@ public class ProductoResponse {
 
     public static ProductoResponse fromProducto(Producto  producto) {
         ProductoResponse dto = new ProductoResponse();
+        dto.id=producto.getId();
         dto.setNombre(producto.getNombre());
         dto.setPrecio(producto.getPrecio());
         dto.setStock(producto.getStock());

@@ -1,5 +1,6 @@
 package com.techlab.ecommerce.dtos.request;
 
+import com.techlab.ecommerce.model.Categoria;
 import com.techlab.ecommerce.model.Producto;
 import jakarta.validation.constraints.*;
 import lombok.Data;
@@ -23,6 +24,8 @@ public class CrearProducto {
     @Min(value = 0, message = "El stock no puede ser negativo")
     @NotNull(message = "El Stock es obligatorio")
     private Integer stock;
+    @NotNull(message = "El Stock es obligatorio")
+    private Long categoriaId;
 
 
     public Producto toProducto() {

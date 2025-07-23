@@ -20,8 +20,9 @@ public class CategoriaController {
         return categoriaService.listarTodos();
     }
     @GetMapping("/{id}")
-    public Optional<Categoria> getUserID(@PathVariable Long id) {
-        return categoriaService.getByID(id);
+    public  Categoria  getUserID(@PathVariable Long id) {
+
+        return  categoriaService.getByID(id) ;
     }
     @PostMapping
     public Categoria crear(@RequestBody Usuario producto) {
