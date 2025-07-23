@@ -72,3 +72,20 @@
 | `GET`  | `/carritos`                        | Listar todos los carritos        |
 | `GET`  | `/carritos/usuario/{id}`           | Carritos por usuario             |
 
+## 📖 Documentación interactiva
+
+Explora y prueba la API con nuestra interfaz Swagger:
+
+[![Swagger UI](https://img.shields.io/badge/Swagger-UI-%23Clojure?style=flat-square&logo=swagger)](http://localhost:8080/swagger-ui/index.html)
+
+🔗 [Acceder a Swagger UI](http://localhost:8080/swagger-ui/index.html)
+
+### ¿Qué puedes hacer aquí?
+✔ Probar endpoints en vivo  
+✔ Ver modelos de datos  
+✔ Generar código automáticamente  
+✔ Descargar documentación en JSON/YAML
+
+*Requisitos:*  
+- El servidor debe estar en ejecución (`http://localhost:8080`)
+- Navegador moderno (Chrome, Firefox, Edge)
