@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 @Data
 public class CarritoResponse {
     private LocalDateTime fechaCreacion;
+    private Long id;
     private Double total;
     private Estado estado;
     private String usuario;
@@ -19,6 +20,7 @@ public class CarritoResponse {
 
     public static CarritoResponse fromCarrito(Carrito carrito){
         CarritoResponse dto = new CarritoResponse();
+        dto.setId(carrito.getId());
         dto.setFechaCreacion(carrito.getFechaCreacion());
         dto.setTotal(carrito.getTotal());
         dto.setEstado(carrito.getEstado());

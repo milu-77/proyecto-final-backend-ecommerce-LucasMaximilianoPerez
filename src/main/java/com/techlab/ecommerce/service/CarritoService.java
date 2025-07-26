@@ -39,7 +39,10 @@ public class CarritoService {
     private UsuarioService usuarioService;
 
     public List<Carrito> listarTodos() {
-        return carritoRepository.findAll();
+        return carritoRepository.findAll()
+                .stream()
+                .filter(carrito -> carrito.getUsuario()!=null)
+                .toList();
     }
 
     public  Carrito getByID(Long id)

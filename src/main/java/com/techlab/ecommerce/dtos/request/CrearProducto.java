@@ -24,8 +24,7 @@ public class CrearProducto {
     @Min(value = 0, message = "El stock no puede ser negativo")
     @NotNull(message = "El Stock es obligatorio")
     private Integer stock;
-    @NotNull(message = "El Stock es obligatorio")
-    private Long categoriaId;
+     private Long categoriaId;
 
 
     public Producto toProducto() {

@@ -84,10 +84,10 @@ public class CarritoController {
     public ResponseEntity<?> crearCarrito(
              @Valid
             @RequestBody
-             CrearCarrito cliente) //VACIA CARRITO Y CREA PEDIDO
+             CrearCarrito carrito) //VACIA CARRITO Y CREA PEDIDO
     {
         try {
-            carritoService.crearCarrito(cliente);
+            carritoService.crearCarrito(carrito);
             return  ResponseEntity.ok("Carrito creado");
 
 
