@@ -20,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Array;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -131,6 +132,8 @@ public class CarritoService {
         // 2. Crear pedido
         Pedido pedido = new Pedido();
         pedido.setUsuario(carrito.getUsuario());
+        LocalDateTime fechaActual = LocalDateTime.now();
+        pedido.setFechaCreacion(fechaActual);
         pedido.setTotal(carrito.getTotal());
         ArrayList<ItemPedido> items =carrito.convertirItemPedido(pedido);
          pedido.setItems(items);

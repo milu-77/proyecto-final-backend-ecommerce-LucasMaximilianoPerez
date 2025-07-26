@@ -58,10 +58,17 @@
                                         <div class="card-text text-muted mb-3 flex-grow-1" style="min-height: 80px;">
                                             {{ producto.descripcion }}
                                         </div>
+                                        <div class="card-text text-muted mb-3 flex-grow-1" style="min-height: 80px;">
+                                            
+                                        </div>
                                         <div class="mt-auto">
                                             <div class="d-flex justify-content-between align-items-center mb-2">
                                                 <span class="badge bg-success rounded-pill">$ {{ producto.precio
-                                                    }}</span>
+                                                    }}</span>  
+                                                    <span class="badge bg-warning rounded-pill">Stock: {{ producto.stock }}
+                                                        
+                                                    </span>  
+                                                    
                                             </div>
                                             <button class="btn btn-primary w-100" :disabled="producto.stock <= 0"
                                                 @click="agregarAlCarrito(producto.id)">
@@ -356,16 +363,61 @@
 
 
                     </div>
-                </div>
-                
-
-
-
-
-
+                </div>                 
             </div>
             <div v-if="botonActivo === 3">
-                <h2>Pedidos</h2>
+                <div class="container mx-auto" >
+                        <h2 class=" text-center mb-4">Lista Pedidos</h2>
+                        <div class="container mt-4">
+                            <div class="card mb-4">
+
+                                <div class="container">
+                                    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th>FECHA CREACION</th>
+                                                    <th>ESTADO</th>
+                                                    <th>USUARIO</th>
+                                                    <th>TOTAL</th>
+                                                    <th>PRODUCTOS</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr v-for="pedido in pedidos" :key="pedido.id">
+                                                    <td>{{ pedido.fechaCreacion }}</td>
+                                                    <td>{{ pedido.estado }}</td>
+                                                    <td>  {{ pedido.usuario }}</td>
+                                                    <td>$ {{ pedido.total }}</td>
+                                                    <td>
+                                                        <table class="table table-sm table-bordered">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Nombre</th>
+                                                                    <th>Cantidad</th>
+                                                                    <th>Precio Unitario</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr v-for="item in pedido.productos" :key="item.id">
+                                                                    <td>{{ item.nombre }}</td>
+                                                                    <td>{{ item.cantidad }}</td>
+                                                                    <td>{{ item.precio }}</td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
 
             </div>
         </main>

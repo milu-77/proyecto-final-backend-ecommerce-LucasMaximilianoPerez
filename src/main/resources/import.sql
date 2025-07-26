@@ -25,20 +25,20 @@ INSERT INTO usuario (username, pass, mail) VALUES
     ('lrodriguez', '$2a$10$AaBbCcDdEeFfGgHhIiJjKk.LlMmNnOoPpQqRrSsTtUuVvWwXxYyZ', 'laura.rodri@mail.org'),
     ('tester1', '$2a$10$1q2w3e4r5t6y7u8i9o0pA.BcDeFgHiJkLmNoPqRsTuVwXyZzAaBbC', 'tester@qa.test');
 
-INSERT INTO carrito (FECHA_CREACION , estado,usuario_id) VALUES
-    ('2024-06-01 10:00:00',0,1),
-    ('2024-06-02 15:30:00',0,2),
-    ('2024-06-03 09:15:00',0,3);
+--INSERT INTO carrito (FECHA_CREACION , estado,usuario_id) VALUES
+--    ('2024-06-01 10:00:00',0,1),
+--    ('2024-06-02 15:30:00',0,2),
+--    ('2024-06-03 09:15:00',0,3);
 
-INSERT INTO item(cantidad ,precio, carrito_id,producto_id,tipo) VALUES
-    (10,100,1,1,'carrito'),
-    (10,100,2,2,'carrito'),
-    (10,100,1,3,'carrito');
-INSERT INTO pedido (FECHA_CREACION , estado,usuario_id) VALUES
-    ('2024-06-01 10:00:00',0,1),
-    ('2024-06-02 15:30:00',1,1),
-    ('2024-06-03 09:15:00',2,1);
-INSERT INTO item(cantidad,precio , pedido_id,producto_id,tipo) VALUES
-    (20,100,1,1,'pedido'),
-    (20,100,2,2,'pedido'),
-    (20,100,1,3,'pedido');
+--INSERT INTO item(cantidad ,precio, carrito_id,producto_id,tipo) VALUES
+--    (10,100,1,1,'carrito'),
+--    (10,100,2,2,'carrito'),
+--    (10,100,1,3,'carrito');
+--INSERT INTO pedido (FECHA_CREACION , estado,usuario_id) VALUES
+--    ('2024-06-01 10:00:00',0,1),
+--    ('2024-06-02 15:30:00',1,1),
+--    ('2024-06-03 09:15:00',2,1);
+--INSERT INTO item(cantidad,precio , pedido_id,producto_id,tipo) VALUES
+--    (20,100,1,1,'pedido'),
+--    (20,100,2,2,'pedido'),
+--    (20,100,1,3,'pedido');

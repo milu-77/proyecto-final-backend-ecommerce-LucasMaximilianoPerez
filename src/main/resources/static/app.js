@@ -218,6 +218,7 @@ Vue.createApp({
          );
         console.log(res.data.message);
         this.getCarrito();
+        this.getPedidos();
       } catch (err) {
           console.error("Error:", err.response?.data?.message);
       } 
@@ -245,12 +246,5 @@ Vue.createApp({
         console.error("Error cargando pedidos:", err.response?.data.message);
       }  
     },  
-
-
-
-
-
-
-
   },
 }).mount("#app");
