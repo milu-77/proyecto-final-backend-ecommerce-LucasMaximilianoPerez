@@ -97,6 +97,13 @@ public class CarritoService {
         productoService.guardar( producto);  // ¡Importante guardar!
         // 4. Crear o actualizar ítem en el carrito
         ItemCarrito item = new ItemCarrito(carrito, producto, datos.getPrecio(), datos.getStock());
+        if(carrito.existeItemPorNombreProducto(item.getProducto().getNombre())){
+            System.out.println("Producto Existe");
+        }else{
+            System.out.println("Producto NO Existe");
+        }
+
+
 
         carrito.getItems()
                 .stream()
@@ -134,8 +141,7 @@ public class CarritoService {
         pedido.setUsuario(carrito.getUsuario());
         LocalDateTime fechaActual = LocalDateTime.now();
         pedido.setFechaCreacion(fechaActual);
-        pedido.setTotal(carrito.getTotal());
-        ArrayList<ItemPedido> items =carrito.convertirItemPedido(pedido);
+         ArrayList<ItemPedido> items =carrito.convertirItemPedido(pedido);
          pedido.setItems(items);
          pedido.setTotal(carrito.getTotal());
          pedido.setEstado(EstadoPedido.EN_PREPARACION);
@@ -156,6 +162,10 @@ public class CarritoService {
         }
 
         Carrito carrito= new Carrito();
+        LocalDateTime fechaActual = LocalDateTime.now();
+        carrito.setFechaCreacion(fechaActual);
+        carrito.setTotal(0.0);
+
         carrito.setUsuario(usuario);
         carrito.setEstado(EstadoCarrito.ACTIVO);
         this.carritoRepository.save(carrito);

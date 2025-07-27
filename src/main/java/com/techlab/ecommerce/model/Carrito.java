@@ -45,7 +45,7 @@ public class Carrito {
     }
 
     public void agregarItem(Item item) {
-            this.setTotal(getTotal()+item.getPrecio()*item.getCantidad());
+            this.setTotal(getTotal()+(item.getPrecio()*item.getCantidad()));
            this.items.add((ItemCarrito) item);
 
 

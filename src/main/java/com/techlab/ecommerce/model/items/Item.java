@@ -26,14 +26,16 @@ public class Item {
     Producto producto;
 
 
-    public Item(Producto producto) {
-        this.cantidad=producto.getStock();
+    public Item(ItemCarrito producto) {
+        this.cantidad=producto.getCantidad();
         this.precio=producto.getPrecio();
-        this.producto=producto;
+        this.producto=producto.getProducto();
     }
     public Item(   ) {
 
     }
 
 
+    public Item(Producto producto) {
+    }
 }

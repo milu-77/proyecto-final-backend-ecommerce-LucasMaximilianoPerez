@@ -89,8 +89,6 @@ public class CarritoController {
         try {
             carritoService.crearCarrito(carrito);
             return  ResponseEntity.ok("Carrito creado");
-
-
         } catch (Exception e) {
         return  ResponseEntity.badRequest().body(new ErrorResponse(HttpStatus.BAD_REQUEST.value(),  e.getMessage()));
     }
@@ -106,10 +104,7 @@ public class CarritoController {
             CrearProducto agregarProducto)
     {
         try{
-
             this.carritoService.actualizar(id,agregarProducto);
-
-
             return ResponseEntity
                     .ok()
                     .body(new AcceptResponse(HttpStatus.CREATED.value(), "Producto Actualizado"));
@@ -119,11 +114,6 @@ public class CarritoController {
                     .badRequest()
                     .body(new ErrorResponse(HttpStatus.BAD_REQUEST.value(), e.getMessage()));
         }
-
-
-
-
-
     }
 
     // DELETE /productos/{id}

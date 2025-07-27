@@ -25,7 +25,7 @@ public class ItemPedido extends Item {
 
 
     public ItemPedido(ItemCarrito itemCarrito, Pedido pedido) {
-            super(itemCarrito.getProducto());
+            super(itemCarrito);
             this.pedido=pedido;
 
     }
