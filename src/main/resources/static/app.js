@@ -49,14 +49,11 @@ Vue.createApp({
       }
     },
     idProductoCarrito(newVal, oldVal) {
-      console.log("Cambió de", oldVal, "a", newVal);
-      this.productoActual =
-        this.productos.find((p) => p.id == this.idProductoCarrito) || {};
-      this.agregarProductoCarrito.nombre = this.productoActual.nombre;
-      this.agregarProductoCarrito.precio = this.productoActual.precio;
+      console.log("Cambió de id producto", oldVal, "a", newVal);
+      this.actualizarProductoCarrito();
     },
     idUsuario(newVal, oldVal) {
-      console.log("Cambió de", oldVal, "a", newVal);
+      console.log("Cambió de usuario", oldVal, "a", newVal);
       let usuarioActual =
         this.usuarios.find((p) => p.id == this.idUsuario) || {};
 
@@ -101,8 +98,22 @@ Vue.createApp({
         text: mensaje,
         icon: "success",
         confirmButtonText: "Cerrar",
-      });
-    },
+      }).then((result) => {
+  if (result.isConfirmed) {
+     
+     this.actualizarProductoCarrito();
+     
+  }
+    })
+  },
+   actualizarProductoCarrito() {
+    console.log("Actualizando producto...");
+    this.productoActual =
+      this.productos.find((p) => p.id == this.idProductoCarrito) || {};
+    this.agregarProductoCarrito.nombre = this.productoActual.nombre;
+    this.agregarProductoCarrito.precio = this.productoActual.precio;
+   
+},
 
     buscarProducto: function () {
       return this.productos.find((item) => item.id === this.idCarrito);
@@ -157,6 +168,8 @@ Vue.createApp({
           "http://localhost:8080/productos",
           this.nuevoProducto
         );
+        console.log(res.data?.message);
+        
         this.alertaOk(res.data?.message || 'Operación completada');
        } catch (err) {
         this.alerta(err.response?.data.message);
@@ -171,9 +184,12 @@ Vue.createApp({
           this.agregarProductoCarrito
         );
         this.alertaOk(res.data?.message || 'Operación completada');
-
         this.getCarrito();
-      } catch (err) {
+        this.getPedidos(); 
+        this.getProductos();
+         
+         
+       } catch (err) {
         this.alerta(err.response?.data.message);
       } finally {
         this.loading = false;
@@ -187,6 +203,7 @@ Vue.createApp({
           `http://localhost:8080/productos/${this.idProducto}`,
           this.nuevoProducto
         );
+         this.getPedidos();
         this.alertaOk(res.data?.message || 'Operación completada');
 
       } catch (err) {

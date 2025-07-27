@@ -16,6 +16,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/carritos")
@@ -74,7 +75,7 @@ public class CarritoController {
     {
         try {
             carritoService.cerrarCarritoYCrearPedido(carritoId);
-            return  ResponseEntity.ok(("Carrito cerrado y pedido creado exitosamente"));
+            return ResponseEntity.ok(Map.of("message", "Carrito cerrado y pedido creado exitosamente"));
 
         } catch (Exception e) {
                 return  ResponseEntity.badRequest().body(new ErrorResponse(HttpStatus.BAD_REQUEST.value(),  e.getMessage()));
@@ -88,7 +89,7 @@ public class CarritoController {
     {
         try {
             carritoService.crearCarrito(carrito);
-            return  ResponseEntity.ok("Carrito creado");
+            return ResponseEntity.ok(Map.of("message", "Carrito creado"));
         } catch (Exception e) {
         return  ResponseEntity.badRequest().body(new ErrorResponse(HttpStatus.BAD_REQUEST.value(),  e.getMessage()));
     }
@@ -104,6 +105,11 @@ public class CarritoController {
             CrearProducto agregarProducto)
     {
         try{
+            if(this.carritoService.getByID(id).getUsuario()==null){
+                return ResponseEntity
+                        .badRequest()
+                        .body(new ErrorResponse(HttpStatus.BAD_REQUEST.value(),"Usuario No presente"));
+            }
             this.carritoService.actualizar(id,agregarProducto);
             return ResponseEntity
                     .ok()

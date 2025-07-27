@@ -306,7 +306,7 @@
                                     <label for="cantidad">Cantidad:</label>
                                     <input type="number" id="cantidad" v-model.number="agregarProductoCarrito.stock"
                                         min="1" max="{{ productoActual.stock || 'No disponible' }}" class="form-input"
-                                        @input="validarNumero">
+                                         >
                                 </div>
 
                                 <button type="submit" class="submit-btn">
