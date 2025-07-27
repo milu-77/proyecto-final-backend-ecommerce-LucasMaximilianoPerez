@@ -7,10 +7,11 @@ Vue.createApp({
       idCarrito: 1,
       idProducto: 2,
       idProductoCarrito: 0,
-      idUsuario:0,
+      idUsuario: 0,
       errorCategorias: true,
       cargandoCategorias: true,
-      
+      loading:true,
+
       url: " https://placehold.co/400x400?text=",
 
       titulo: "java adultos-1C2025",
@@ -28,17 +29,14 @@ Vue.createApp({
         url: "producto+nuevo",
         categoriaId: 0,
       },
-      agregarProductoCarrito:{
+      agregarProductoCarrito: {
         nombre: "",
-        precio:0,
-        stock:0,
-       },
-       nuevoCarrito:{
-        usuario:""
-       }
-
-      
-      
+        precio: 0,
+        stock: 0,
+      },
+      nuevoCarrito: {
+        usuario: "",
+      },
     };
   },
   created() {},
@@ -52,17 +50,17 @@ Vue.createApp({
     },
     idProductoCarrito(newVal, oldVal) {
       console.log("Cambió de", oldVal, "a", newVal);
-      this.productoActual = this.productos.find((p) => p.id == this.idProductoCarrito) || {};
-        this.agregarProductoCarrito.nombre=this.productoActual.nombre;
-        this.agregarProductoCarrito.precio=this.productoActual.precio;
- 
+      this.productoActual =
+        this.productos.find((p) => p.id == this.idProductoCarrito) || {};
+      this.agregarProductoCarrito.nombre = this.productoActual.nombre;
+      this.agregarProductoCarrito.precio = this.productoActual.precio;
     },
     idUsuario(newVal, oldVal) {
       console.log("Cambió de", oldVal, "a", newVal);
-      let usuarioActual  = this.usuarios.find((p) => p.id == this.idUsuario) || {};
-       
-        this.nuevoCarrito.usuario=usuarioActual.username;
-  
+      let usuarioActual =
+        this.usuarios.find((p) => p.id == this.idUsuario) || {};
+
+      this.nuevoCarrito.usuario = usuarioActual.username;
     },
   },
 
@@ -76,7 +74,6 @@ Vue.createApp({
   updated: function () {},
 
   methods: {
-   
     accionBoton: function (numeroSeccion) {
       console.log("numeroSeccion:", numeroSeccion); // Verifica el valor
       this.botonActivo = numeroSeccion;
@@ -90,16 +87,33 @@ Vue.createApp({
     accioncarrito: function (numeroSeccion) {
       this.botonCarrito = numeroSeccion;
     },
+    alerta: function (mensaje) {
+      Swal.fire({
+        title: "Error!",
+        text: mensaje,
+        icon: "error",
+        confirmButtonText: "Cerrar",
+      });
+    },
+    alertaOk: function (mensaje) {
+      Swal.fire({
+        title: "OK!",
+        text: mensaje,
+        icon: "success",
+        confirmButtonText: "Cerrar",
+      });
+    },
+
     buscarProducto: function () {
       return this.productos.find((item) => item.id === this.idCarrito);
     },
-     async getProductos() {
+    async getProductos() {
       try {
         const res = await axios.get(`http://localhost:8080/productos`);
 
         this.productos = res.data;
       } catch (err) {
-        console.error("Error:", err.response?.data.message);
+        this.alerta(err.response?.data.message);
       }
     },
     async getCarrito() {
@@ -108,7 +122,7 @@ Vue.createApp({
 
         this.carritos = res.data;
       } catch (err) {
-        console.error("Error:", err.response?.data.message);
+        this.alerta(err.response?.data.message);
       }
     },
     async getPedidos() {
@@ -117,7 +131,7 @@ Vue.createApp({
 
         this.pedidos = res.data;
       } catch (err) {
-        console.error("Error cargando categorías:", err.response?.data.message);
+        this.alerta(err.response?.data.message);
       }
     },
     async getProducto() {
@@ -132,7 +146,7 @@ Vue.createApp({
         this.nuevoProducto.descripcion = res.data.descripcion;
         this.nuevoProducto.url = res.data.url;
       } catch (err) {
-        console.error("Error cargando categorías:", err.response?.data.message);
+        this.alerta(err.response?.data.message);
       }
     },
     async agregarProducto() {
@@ -143,25 +157,25 @@ Vue.createApp({
           "http://localhost:8080/productos",
           this.nuevoProducto
         );
-         console.log(res.data.message);
-      } catch (err) {
-          console.error("Error:", err.response?.data?.message);
+        this.alertaOk(res.data?.message || 'Operación completada');
+       } catch (err) {
+        this.alerta(err.response?.data.message);
       } finally {
         this.loading = false;
       }
     },
-     async agregarProductoAlCarrito() {
-      
+    async agregarProductoAlCarrito() {
       try {
         const res = await axios.put(
           `http://127.0.0.1:8080/carritos/${this.idCarrito}`,
           this.agregarProductoCarrito
         );
-        console.log(res.data.message);
+        this.alertaOk(res.data?.message || 'Operación completada');
+
         this.getCarrito();
-     } catch (err) {
-          console.error("Error:", err.response?.data?.message);
-      }finally {
+      } catch (err) {
+        this.alerta(err.response?.data.message);
+      } finally {
         this.loading = false;
       }
     },
@@ -169,14 +183,15 @@ Vue.createApp({
       this.loading = true;
       this.nuevoProducto.url = this.url + this.nuevoProducto.url;
       try {
-        const response = await axios.put(
+        const res = await axios.put(
           `http://localhost:8080/productos/${this.idProducto}`,
           this.nuevoProducto
         );
-        console.log(response.data.message);
+        this.alertaOk(res.data?.message || 'Operación completada');
+
       } catch (err) {
-          console.error("Error:", err.response?.data?.message);
-      }  
+        this.alerta(err.response?.data.message);
+      }
     },
     async cargarCategorias() {
       this.loadingCategorias = true;
@@ -185,20 +200,20 @@ Vue.createApp({
         this.categorias = res.data;
         this.cargandoCategorias = false;
       } catch (err) {
-        console.error("Error cargando categorías:", err.response?.data.message);
+        this.alerta(err.response?.data.message);
       } finally {
         this.loadingCategorias = false;
       }
-    },    
+    },
     async eliminarProducto() {
       try {
         const res = await axios.delete(
           `http://localhost:8080/productos/${this.idProducto}`
         );
 
-        console.log(res.data.message);
+        this.alertaOk(res.data?.message || 'Operación completada');
       } catch (err) {
-          console.error("Error:", err.response?.data?.message);
+        this.alerta(err.response?.data.message);
       }
     },
     async getUsuarios() {
@@ -206,45 +221,48 @@ Vue.createApp({
         const res = await axios.get(`http://localhost:8080/usuarios`);
 
         this.usuarios = res.data;
+ 
       } catch (err) {
-          console.error("Error:", err.response?.data?.message);
+        this.alerta(err.response?.data.message);
       }
     },
 
-    async cerrarCarrito(){
+    async cerrarCarrito() {
       try {
         const res = await axios.post(
-          `http://127.0.0.1:8080/carritos/${this.idCarrito}/cerrar`,
-         );
-        console.log(res.data.message);
+          `http://127.0.0.1:8080/carritos/${this.idCarrito}/cerrar`
+        );
+        this.alertaOk(res.data?.message || 'Operación completada');
         this.getCarrito();
         this.getPedidos();
+
       } catch (err) {
-          console.error("Error:", err.response?.data?.message);
-      } 
+        this.alerta(err.response?.data.message);
+      }
     },
-     async crearCarrito(){
-      this.nuevoCarrito
+    async crearCarrito() {
+      this.nuevoCarrito;
       try {
         const res = await axios.post(
           `http://127.0.0.1:8080/carritos/crear`,
           this.nuevoCarrito
-         );
-        console.log(res.data.message);
+        );
+        this.alertaOk(res.data?.message || 'Operación completada');
         this.getCarrito();
-
-       } catch (err) {
-          console.error("Error:", err.response?.data?.message);
-      }  
+      } catch (err) {
+        this.alerta(err.response?.data.message);
+      }
     },
- async cargarPedidos() {
+    async cargarPedidos() {
       this.loadingCategorias = true;
       try {
         const res = await axios.get("http://localhost:8080/pedidos"); // Endpoint de tu API
         this.pedidos = res.data;
-       } catch (err) {
-        console.error("Error cargando pedidos:", err.response?.data.message);
-      }  
-    },  
+                this.alerta(err.response?.data.message);
+
+      } catch (err) {
+        this.alerta(err.response?.data.message);
+      }
+    },
   },
 }).mount("#app");

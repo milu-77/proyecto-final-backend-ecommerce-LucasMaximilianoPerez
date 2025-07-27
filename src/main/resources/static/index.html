@@ -59,16 +59,16 @@
                                             {{ producto.descripcion }}
                                         </div>
                                         <div class="card-text text-muted mb-3 flex-grow-1" style="min-height: 80px;">
-                                            
+
                                         </div>
                                         <div class="mt-auto">
                                             <div class="d-flex justify-content-between align-items-center mb-2">
                                                 <span class="badge bg-success rounded-pill">$ {{ producto.precio
-                                                    }}</span>  
-                                                    <span class="badge bg-warning rounded-pill">Stock: {{ producto.stock }}
-                                                        
-                                                    </span>  
-                                                    
+                                                    }}</span>
+                                                <span class="badge bg-warning rounded-pill">Stock: {{ producto.stock }}
+
+                                                </span>
+
                                             </div>
                                             <button class="btn btn-primary w-100" :disabled="producto.stock <= 0"
                                                 @click="agregarAlCarrito(producto.id)">
@@ -129,7 +129,7 @@
                             </div>
                             <!-- Botón de Envío -->
                             <div class="d-grid gap-2">
-                                <button type="submit" class="btn btn-primary" :disabled="loading">
+                                <button type="submit" class="btn btn-primary">
                                     Guardar Producto
                                 </button>
                             </div>
@@ -189,8 +189,8 @@
                             </div>
                             <!-- Botón de Envío -->
                             <div class="d-grid gap-2">
-                                <button type="submit" class="btn btn-primary" :disabled="loading">
-                                    {{ loading ? 'Enviando...' : 'Modificar Producto' }}
+                                <button type="submit" class="btn btn-primary">
+                                    Modificar Producto
                                 </button>
                             </div>
                         </form>
@@ -223,7 +223,7 @@
                         producto</button>
                     <button @click="accioncarrito(3)" :class="{ activo: botonCarrito === 3 }">Cerrar carrito
                     </button>
-                    
+
                     <button @click="accioncarrito(4)" :class="{ activo: botonCarrito === 4 }">crear
                         carrito</button>
                 </div>
@@ -290,7 +290,7 @@
                             </select>
                         </div>
                         <h2>Producto </h2>
-                        <div class="mb-3"> 
+                        <div class="mb-3">
                             <form @submit.prevent="agregarProductoAlCarrito" class="form-container">
                                 <label for="productosNuevo" class="form-label">Seleccione producto a eliminar:</label>
                                 <select id="productosNuevo" class="form-select" v-model="idProductoCarrito">
@@ -304,9 +304,10 @@
 
                                 <div class="form-group">
                                     <label for="cantidad">Cantidad:</label>
-                                    <input type="number" id="cantidad" v-model.number="agregarProductoCarrito.stock" min="1"
-                                        max="{{ productoActual.stock || 'No disponible' }}" class="form-input" @input="validarNumero">
-                                 </div>
+                                    <input type="number" id="cantidad" v-model.number="agregarProductoCarrito.stock"
+                                        min="1" max="{{ productoActual.stock || 'No disponible' }}" class="form-input"
+                                        @input="validarNumero">
+                                </div>
 
                                 <button type="submit" class="submit-btn">
                                     Enviar
@@ -355,7 +356,7 @@
                                     </option>
                                 </select>
                             </div>
-                            <button class="btn btn-primary" @click="crearCarrito">crear Carrito  </button>
+                            <button class="btn btn-primary" @click="crearCarrito">crear Carrito </button>
                         </div>
 
 
@@ -363,59 +364,59 @@
 
 
                     </div>
-                </div>                 
+                </div>
             </div>
             <div v-if="botonActivo === 3">
-                <div class="container mx-auto" >
-                        <h2 class=" text-center mb-4">Lista Pedidos</h2>
-                        <div class="container mt-4">
-                            <div class="card mb-4">
+                <div class="container mx-auto">
+                    <h2 class=" text-center mb-4">Lista Pedidos</h2>
+                    <div class="container mt-4">
+                        <div class="card mb-4">
 
-                                <div class="container">
-                                    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
-                                        <table class="table">
-                                            <thead>
-                                                <tr>
-                                                    <th>FECHA CREACION</th>
-                                                    <th>ESTADO</th>
-                                                    <th>USUARIO</th>
-                                                    <th>TOTAL</th>
-                                                    <th>PRODUCTOS</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr v-for="pedido in pedidos" :key="pedido.id">
-                                                    <td>{{ pedido.fechaCreacion }}</td>
-                                                    <td>{{ pedido.estado }}</td>
-                                                    <td>  {{ pedido.usuario }}</td>
-                                                    <td>$ {{ pedido.total }}</td>
-                                                    <td>
-                                                        <table class="table table-sm table-bordered">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th>Nombre</th>
-                                                                    <th>Cantidad</th>
-                                                                    <th>Precio Unitario</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                <tr v-for="item in pedido.productos" :key="item.id">
-                                                                    <td>{{ item.nombre }}</td>
-                                                                    <td>{{ item.cantidad }}</td>
-                                                                    <td>{{ item.precio }}</td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
+                            <div class="container">
+                                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>FECHA CREACION</th>
+                                                <th>ESTADO</th>
+                                                <th>USUARIO</th>
+                                                <th>TOTAL</th>
+                                                <th>PRODUCTOS</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr v-for="pedido in pedidos" :key="pedido.id">
+                                                <td>{{ pedido.fechaCreacion }}</td>
+                                                <td>{{ pedido.estado }}</td>
+                                                <td> {{ pedido.usuario }}</td>
+                                                <td>$ {{ pedido.total }}</td>
+                                                <td>
+                                                    <table class="table table-sm table-bordered">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Nombre</th>
+                                                                <th>Cantidad</th>
+                                                                <th>Precio Unitario</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr v-for="item in pedido.productos" :key="item.id">
+                                                                <td>{{ item.nombre }}</td>
+                                                                <td>{{ item.cantidad }}</td>
+                                                                <td>{{ item.precio }}</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
 
-                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
 
 
 
@@ -438,6 +439,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script src="app.js"></script>
 </body>
